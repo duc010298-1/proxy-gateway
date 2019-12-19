@@ -9,7 +9,6 @@
         "database": "postgres"
     },
     "prod": {
-        "driver": "pg",
-        "native": "true"
+        "ENV": "DATABASE_URL"
     }
 }
