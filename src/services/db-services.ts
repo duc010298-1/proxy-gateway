@@ -16,7 +16,7 @@ export class DBServices {
         return db.one('SELECT * FROM server_ip')
             .then((data: any) => {
                 console.log('DATA:', data.ip);
-                return data.ip;
+                return data;
             })
             .catch((error: any) => {
                 console.log('ERROR:', error);

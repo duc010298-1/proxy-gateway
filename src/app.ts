@@ -11,8 +11,8 @@ app.set('view engine', 'pug');
 
 app.get('/server-ip', (req: Request, res: Response) => {
     dbServices.getIp().then(
-        (val: any) => {
-            res.render('viewIp', { ip: val, lastUpdate: 'val' });
+        (data: any) => {
+            res.render('viewIp', { ip: data.ip, lastUpdate: data.lastupdate.toLocaleString() });
         },
     );
 });
