@@ -8,5 +8,8 @@
         "password": "12345678",
         "database": "postgres"
     },
-    "heroku": "DATABASE_URL"
+    "heroku": {
+        "driver": "pg",
+        "ENV": "DATABASE_URL"
+    }
 }
