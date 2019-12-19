@@ -4,7 +4,7 @@
   "description": "Redirect request to real server",
   "main": "dist/app.js",
   "scripts": {
-    "start": "db-migrate up && node .",
+    "start": "db-migrate -e prod up && node .",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p ."
   },
