@@ -22,4 +22,14 @@ export class DBServices {
                 console.log('ERROR:', error);
             });
     }
+
+    public setIp(ip: string) {
+        return db.none('UPDATE server_ip SET ip=$1, lastUpdate=NOW()', ip)
+            .then((data: any) => {
+                console.log('UPDATE SUCCESS');
+            })
+            .catch((error: any) => {
+                console.log('ERROR:', error);
+            });
+    }
 }

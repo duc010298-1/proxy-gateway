@@ -1,3 +1,5 @@
+set time zone +7;
+
 create table if not exists server_ip
 (
     id int primary key,

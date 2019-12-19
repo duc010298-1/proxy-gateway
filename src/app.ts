@@ -1,11 +1,14 @@
+import bodyParser from 'body-parser';
 import express, { Application, Request, Response } from 'express';
 import { Config } from './config/config';
 import { DBServices } from './services/db-services';
 
 const app: Application = express();
+const dbServices = new DBServices();
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/server-ip', (req: Request, res: Response) => {
-    const dbServices = new DBServices();
     dbServices.getIp().then(
         (val: any) => {
             const html = renderHtml(val);
@@ -21,8 +24,7 @@ app.get('/server-ip', (req: Request, res: Response) => {
 });
 
 app.post('/server-ip', (req: Request, res: Response) => {
-    // const ip = req.query.ip;
-    // console.log(req.body);
+    dbServices.setIp(req.body.ip);
     res.status(200).send();
 });
 
