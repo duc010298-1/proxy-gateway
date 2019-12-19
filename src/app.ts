@@ -33,4 +33,4 @@ app.listen(process.env.PORT || Config.serverPort, () => console.log('Server runn
 const renderHtml = (valueIp: any): string => {
     const originHtml = '<!DOCTYPE html><html><head> <title>Server IP</title></head><body> <h1 style="text-align: center; margin: 100px auto 0 auto">$value</h1></body></html>';
     return originHtml.replace('$value', valueIp);
-}
+};
