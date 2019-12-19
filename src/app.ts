@@ -12,7 +12,7 @@ app.set('view engine', 'pug');
 app.get('/server-ip', (req: Request, res: Response) => {
     dbServices.getIp().then(
         (val: any) => {
-            res.render('viewIp', { title: 'Hey', message: val });
+            res.render('viewIp', { ip: val, lastUpdate: 'val' });
         },
     );
 });
