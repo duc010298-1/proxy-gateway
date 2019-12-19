@@ -1,5 +1,4 @@
 {
-    "defaultEnv": "heroku",
     "dev": {
         "driver": "pg",
         "host": "localhost",
@@ -8,8 +7,7 @@
         "password": "12345678",
         "database": "postgres"
     },
-    "heroku": {
-        "driver": "pg",
+    "prod": {
         "ENV": "DATABASE_URL"
     }
 }
