@@ -1,5 +1,12 @@
 {
-    "heroku": {
-        "ENV": "DATABASE_URL"
-    }
+    "defaultEnv": "heroku",
+    "dev": {
+        "driver": "pg",
+        "host": "localhost",
+        "port": "5432",
+        "user": "postgres",
+        "password": "12345678",
+        "database": "postgres"
+    },
+    "heroku": "DATABASE_URL"
 }
