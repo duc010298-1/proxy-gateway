@@ -19,7 +19,28 @@ app.get('/server-ip', (req: Request, res: Response) => {
 
 app.post('/server-ip', (req: Request, res: Response) => {
     dbServices.setIp(req.body.ip);
+    // tslint:disable-next-line: no-var-requires
+    app.use(require('json-proxy').initialize({
+        proxy: {
+            forward: {
+                '/(.*)': 'http://' + req.body.ip + ':9812/' + '$1',
+            },
+        },
+    }));
     res.status(200).send();
 });
 
 app.listen(process.env.PORT || Config.serverPort, () => console.log('Server running...'));
+
+dbServices.getIp().then(
+    (data: any) => {
+        // tslint:disable-next-line: no-var-requires
+        app.use(require('json-proxy').initialize({
+            proxy: {
+                forward: {
+                    '/(.*)': 'http://' + data.ip + ':9812/' + '$1',
+                },
+            },
+        }));
+    },
+);
