@@ -4,9 +4,10 @@
   "description": "Redirect request to real server",
   "main": "dist/app.js",
   "scripts": {
-    "start": "db-migrate -e prod up && node .",
+    "migration": "db-migrate -e dev up",
     "dev": "nodemon src/app.ts",
-    "build": "tsc -p ."
+    "start": "node .",
+    "build": "tsc -p . && db-migrate -e prod up"
   },
   "repository": {
     "type": "git",

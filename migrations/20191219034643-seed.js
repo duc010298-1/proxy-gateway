@@ -19,7 +19,7 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db) {
-  var filePath = path.join(__dirname, 'sqls', 'V1__Init_database.sql');
+  var filePath = path.join(__dirname, 'sqls', '20191219034643-seed.sql');
   return new Promise(function (resolve, reject) {
     fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
       if (err) return reject(err);
