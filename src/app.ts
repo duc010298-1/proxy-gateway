@@ -7,19 +7,18 @@ const app: Application = express();
 const dbServices = new DBServices();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'pug');
 
 app.get('/server-ip', (req: Request, res: Response) => {
     dbServices.getIp().then(
         (data: any) => {
-            res.render('viewIp', { ip: data.ip, lastUpdate: data.lastupdate.toLocaleString() });
+            data.lastupdate = data.lastupdate.toLocaleString();
+            res.send(data);
         },
     );
 });
 
 app.post('/server-ip', (req: Request, res: Response) => {
     dbServices.setIp(req.body.ip);
-    // tslint:disable-next-line: no-var-requires
     app.use(require('json-proxy').initialize({
         proxy: {
             forward: {
@@ -34,7 +33,6 @@ app.listen(process.env.PORT || Config.serverPort, () => console.log('Server runn
 
 dbServices.getIp().then(
     (data: any) => {
-        // tslint:disable-next-line: no-var-requires
         app.use(require('json-proxy').initialize({
             proxy: {
                 forward: {
