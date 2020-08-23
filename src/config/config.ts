@@ -3,6 +3,6 @@ export enum Config {
     pgHost = 'localhost',
     pgPort = '5432',
     pgUsername = 'postgres',
-    pgPassword = '12345678',
+    pgPassword = 'fsoft@12345',
     pgDatabase = 'postgres',
 }

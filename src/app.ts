@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/server-ip', (req: Request, res: Response) => {
     dbServices.getIp().then(
         (data: any) => {
-            data.lastupdate = data.lastupdate.toLocaleString();
+            data.lastupdate = data.lastupdate.toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
             res.send(data);
         },
     );
@@ -19,13 +19,9 @@ app.get('/server-ip', (req: Request, res: Response) => {
 
 app.post('/server-ip', (req: Request, res: Response) => {
     dbServices.setIp(req.body.ip);
-    app.use(require('json-proxy').initialize({
-        proxy: {
-            forward: {
-                '/(.*)': 'http://' + req.body.ip + ':9812/' + '$1',
-            },
-        },
-    }));
+    app.use('/*', (req: Request, res: Response) => {
+        res.redirect(`http://${req.body.ip}/${req.originalUrl}`);
+    });
     res.status(200).send();
 });
 
@@ -33,12 +29,8 @@ app.listen(process.env.PORT || Config.serverPort, () => console.log('Server runn
 
 dbServices.getIp().then(
     (data: any) => {
-        app.use(require('json-proxy').initialize({
-            proxy: {
-                forward: {
-                    '/(.*)': 'http://' + data.ip + ':9812/' + '$1',
-                },
-            },
-        }));
+        app.use('/*', (req: Request, res: Response) => {
+            res.redirect(`http://${data.ip}/${req.originalUrl}`);
+        });
     },
 );

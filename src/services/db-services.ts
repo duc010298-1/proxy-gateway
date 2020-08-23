@@ -1,7 +1,7 @@
 import pgPromise from 'pg-promise';
 import { Config } from '../config/config';
 
-const pgp = pgPromise({/* Initialization Options */ });
+const pgp = pgPromise({});
 let db: any;
 if (process.env.DATABASE_URL) {
     db = pgp(process.env.DATABASE_URL);
