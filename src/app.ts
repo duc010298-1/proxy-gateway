@@ -30,7 +30,7 @@ app.listen(process.env.PORT || Config.serverPort, () => console.log('Server runn
 dbServices.getIp().then(
     (data: any) => {
         app.use('/*', (req: Request, res: Response) => {
-            res.redirect(`http://${data.ip}/${req.originalUrl}`);
+            res.redirect(`http://${data.ip}:85/${req.originalUrl}`);
         });
     },
 );
